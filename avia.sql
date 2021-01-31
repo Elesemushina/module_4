@@ -41,6 +41,16 @@ Moscow   |SVO  |10210
 
 Ни один человек не летаел зимой в Новокузнецк
 */
+----но все самолеты из Анапы вылетели в Новокузнецк, не было отмененных рейсов
+select distinct status
+from dst_project.flights f
+join dst_project.airports a_from on a_from.airport_code= f.departure_airport
+join dst_project.airports a_to on a_to.airport_code= f.arrival_airport
+join dst_project.aircrafts s on s.aircraft_code=f.aircraft_code
+join dst_project.seats se on s.aircraft_code=se.aircraft_code
+where a_from.city = 'Anapa' and a_to.city = 'Novokuznetsk'
+and scheduled_departure >= '2016-12-01'
+and scheduled_departure< '2017-03-01'
 
 ----наиболее частые перелеты
 select date_trunc('month',actual_departure), extract(hour from scheduled_departure),  a_to.city,count(flight_id)
