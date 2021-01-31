@@ -105,7 +105,7 @@ select city,
        model,
        flight_id, 
        profit - costs as pnl,  
-       (profit - costs)/costs as margin
+       profit/costs as margin
 from (select  a_to.city,
         s.model, 
         f.flight_id,
